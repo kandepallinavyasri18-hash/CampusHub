@@ -1,0 +1,1 @@
+"""CampusHub Flask backend package."""
