@@ -1,1 +1,7 @@
--r flask_backend/requirements.txt
+flask
+flask-cors
+pymongo[srv]
+python-dotenv
+pyjwt
+bcrypt
+gunicorn
