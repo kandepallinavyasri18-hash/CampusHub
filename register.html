@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create your account &mdash; CampusHub</title>
+  <meta name="description" content="Register as a student or faculty member on CampusHub." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127891;</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="register">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html">
+        <span class="brand-mark" aria-hidden="true">&#127891;</span>
+        <span class="brand-text">Campus<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="primaryNav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/register.html" class="is-active">Register</a>
+        <a href="/login.html">Login</a>
+        <span class="nav-auth" data-auth-slot="header"></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth-main">
+    <div class="container auth-layout">
+      <!-- ---------- Info side ---------- -->
+      <aside class="auth-aside">
+        <h1>Join CampusHub</h1>
+        <p class="lede small">
+          Create one account to share resources, ask questions and follow campus
+          announcements. Your password is hashed before it is stored.
+        </p>
+        <ul class="check-list">
+          <li>Students: search and share study material</li>
+          <li>Faculty: upload resources and publish announcements</li>
+          <li>Admins: manage campus users, resources and platform activity</li>
+        </ul>
+        <p class="muted small">Already registered? <a href="/login.html">Login to your account</a>.</p>
+      </aside>
+      <!-- ---------- Form side ---------- -->
+      <section class="auth-card" aria-labelledby="registerHeading">
+        <h2 id="registerHeading">Create your account</h2>
+        <p class="muted small">Complete all required fields. Roll number can be added with your first assignment submission.</p>
+
+        <!-- Global status message (filled by js/script.js) -->
+        <div class="alert" id="formAlert" role="alert" aria-live="polite" hidden></div>
+
+        <form id="registerForm" class="form" novalidate>
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name"
+                   placeholder="e.g. Ananya Sharma" required />
+            <p class="field-error" id="fullNameError" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email"
+                   placeholder="you@college.edu" required />
+            <p class="field-error" id="emailError" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input type="password" id="password" name="password" autocomplete="new-password"
+                     placeholder="At least 6 characters" required />
+              <button type="button" class="btn-toggle-pw" data-toggle-password="password" aria-label="Show password">Show</button>
+            </div>
+            <p class="field-hint">Use at least 6 characters. Stored as a secure hash, never as plain text.</p>
+            <p class="field-error" id="passwordError" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="input-group">
+              <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password"
+                     placeholder="Re-enter your password" required />
+              <button type="button" class="btn-toggle-pw" data-toggle-password="confirmPassword" aria-label="Show password">Show</button>
+            </div>
+            <p class="field-error" id="confirmPasswordError" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="branch">Branch</label>
+            <select id="branch" name="branch" class="select" required>
+              <option value="">Select your branch</option>
+              <option>CSE</option>
+              <option>CSE (Data Science)</option>
+              <option>ECE</option>
+              <option>EEE</option>
+              <option>Computer Science</option>
+              <option>Information Technology</option>
+              <option>Electronics</option>
+              <option>Mechanical</option>
+              <option>Civil</option>
+              <option>Electrical</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="rollNumber">Roll number <span class="muted small">(optional; required before your first assignment submission)</span></label>
+            <input type="text" id="rollNumber" name="rollNumber" autocomplete="off" maxlength="32"
+                   placeholder="e.g. CSE2026001" />
+            <p class="field-error" id="rollNumberError" hidden></p>
+          </div>
+
+          <fieldset class="field role-fieldset">
+            <legend>Select your role</legend>
+            <div class="role-options">
+              <label class="role-option">
+                <input type="radio" name="role" value="student" checked />
+                <span class="role-option-body">
+                  <span class="role-option-title"><span aria-hidden="true">&#127891;</span> Student</span>
+                  <span class="muted small">Search resources, ask questions, follow announcements</span>
+                </span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="faculty" />
+                <span class="role-option-body">
+                  <span class="role-option-title"><span aria-hidden="true">&#128218;</span> Faculty</span>
+                  <span class="muted small">Upload resources, answer questions, post announcements</span>
+                </span>
+              </label>
+            </div>
+            <p class="field-hint">Admin accounts are provisioned separately by an authorized administrator.</p>
+            <p class="field-error" id="roleError" hidden></p>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary btn-block" id="registerSubmit">Register</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="/login.html">Login</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">&copy; <span data-year>2026</span> CampusHub &mdash; Campus Knowledge &amp; Resource Sharing System</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="/login.html">Login</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

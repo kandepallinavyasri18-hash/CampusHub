@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Dashboard &mdash; CampusHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127891;</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="faculty-dashboard" data-role="faculty">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header dash-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html">
+        <span class="brand-mark" aria-hidden="true">&#127891;</span>
+        <span class="brand-text">Campus<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="dashSidebar" aria-label="Toggle dashboard navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="dash-header-right">
+        <span class="role-badge role-badge-faculty" data-user-role>&#128218; Faculty</span>
+        <span class="user-chip" data-user-name>Loading&hellip;</span>
+        <button type="button" class="btn btn-outline btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dash-layout container">
+    <aside class="dash-sidebar" id="dashSidebar">
+      <nav class="dash-nav" aria-label="Faculty dashboard sections">
+        <a class="dash-nav-link is-active" href="#search-resources" data-panel-target="search-resources"><span aria-hidden="true">&#128269;</span> Available Resources</a>
+        <a class="dash-nav-link" href="#upload-resource" data-panel-target="upload-resource"><span aria-hidden="true">&#11014;&#65039;</span> Upload Resource</a>
+        <a class="dash-nav-link" href="#questions" data-panel-target="questions"><span aria-hidden="true">&#10067;</span> Questions</a>
+        <a class="dash-nav-link" href="#assignments" data-panel-target="assignments"><span aria-hidden="true">&#128221;</span> Assignments</a>
+        <a class="dash-nav-link" href="#leadership" data-panel-target="leadership"><span aria-hidden="true">&#127942;</span> Leadership</a>
+        <a class="dash-nav-link" href="#announcements" data-panel-target="announcements"><span aria-hidden="true">&#128227;</span> Announcements</a>
+        <a class="dash-nav-link" href="#profile" data-panel-target="profile"><span aria-hidden="true">&#128100;</span> Profile</a>
+      </nav>
+      <div class="dash-sidebar-foot">
+        <p class="muted small">Signed in as faculty.</p>
+        <button type="button" class="btn btn-outline btn-sm btn-block" data-logout>Logout</button>
+      </div>
+    </aside>
+
+    <main class="dash-main" id="main">
+      <div class="session-state" id="sessionState">
+        <span class="spinner" aria-hidden="true"></span> Checking your session&hellip;
+      </div>
+
+      <div id="dashContent" hidden>
+        <!-- ===== Available Resources ===== -->
+        <section class="dash-panel" id="search-resources" data-panel="search-resources" hidden>
+          <header class="panel-head">
+            <h1>Available Resources</h1>
+            <p>Find shared documents and ask questions directly from a resource.</p>
+          </header>
+          <div class="card">
+            <form id="resourceSearchForm" class="inline-form">
+              <input id="resourceSearchInput" name="search" type="search" class="input" placeholder="Search by title, description or file name&hellip;" aria-label="Search resources" />
+              <select id="resourceBranchFilter" name="branch" class="select" aria-label="Filter by branch">
+                <option value="">All branches</option>
+                <option>Computer Science</option>
+                <option>Information Technology</option>
+                <option>Electronics</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+                <option>Electrical</option>
+              </select>
+              <input name="subject" type="search" class="input" placeholder="Subject" aria-label="Filter by subject" />
+              <select name="semester" class="select" aria-label="Filter by semester">
+                <option value="">All semesters</option>
+                <option value="1">Semester 1</option><option value="2">Semester 2</option>
+                <option value="3">Semester 3</option><option value="4">Semester 4</option>
+                <option value="5">Semester 5</option><option value="6">Semester 6</option>
+                <option value="7">Semester 7</option><option value="8">Semester 8</option>
+              </select>
+              <select id="resourceCategoryFilter" name="category" class="select" aria-label="Filter by category">
+                <option value="">All categories</option><option>Notes</option><option>Slides</option>
+                <option>Question Paper</option><option>Assignment</option><option>Reference Link</option>
+                <option>Lab Manual</option><option>Syllabus</option>
+              </select>
+              <select name="sort" class="select" aria-label="Sort resources">
+                <option value="newest">Newest</option>
+                <option value="rating">Highest rated</option>
+              </select>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <p id="resourceSearchStatus" class="muted small" aria-live="polite"></p>
+          </div>
+          <div id="availableResourceList" class="resource-list" aria-live="polite"></div>
+        </section>
+        <!-- ===== Upload Resource ===== -->
+        <section class="dash-panel" id="upload-resource" data-panel="upload-resource" hidden>
+          <header class="panel-head">
+            <h1>Upload Resource</h1>
+            <p>Share lecture notes, slides, assignments or reference links with your students.</p>
+          </header>
+          <div class="card">
+            <form id="resourceUploadForm" class="form">
+              <div class="field">
+                <label for="resourceTitle">Title</label>
+                <input type="text" id="resourceTitle" name="title" class="input" placeholder="e.g. Unit 3 - Normalisation notes" />
+              </div>
+              <div class="field">
+                <label for="resourceDescription">Description</label>
+                <textarea id="resourceDescription" name="description" class="input textarea" rows="4" placeholder="Briefly describe the resource and how students can use it."></textarea>
+              </div>
+              <div class="field">
+                <label for="resourceSubject">Subject</label>
+                <input type="text" id="resourceSubject" name="subject" class="input" maxlength="160" placeholder="e.g. Data Structures" />
+              </div>
+              <div class="field">
+                <label for="resourceSemester">Semester</label>
+                <select id="resourceSemester" name="semester" class="select">
+                  <option value="">Select semester</option>
+                  <option value="1">Semester 1</option><option value="2">Semester 2</option>
+                  <option value="3">Semester 3</option><option value="4">Semester 4</option>
+                  <option value="5">Semester 5</option><option value="6">Semester 6</option>
+                  <option value="7">Semester 7</option><option value="8">Semester 8</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="resourceCategory">Category</label>
+                <select id="resourceCategory" name="category" class="select resource-category-select">
+                  <option>Notes</option><option>Slides</option><option>Question Paper</option>
+                  <option>Assignment</option><option>Reference Link</option><option>Lab Manual</option>
+                  <option>Syllabus</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="resourceBranch">Branch</label>
+                <select id="resourceBranch" name="branch" class="select" required>
+                  <option value="">Select branch</option>
+                  <option>Computer Science</option>
+                  <option>Information Technology</option>
+                  <option>Electronics</option>
+                  <option>Mechanical</option>
+                  <option>Civil</option>
+                  <option>Electrical</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="resourceFile">Document</label>
+                <input type="file" id="resourceFile" name="file" class="input" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" required />
+              </div>
+              <div id="resourceFormAlert" class="alert" hidden></div>
+              <button type="submit" class="btn btn-primary" id="resourceSubmit">Upload resource</button>
+            </form>
+          </div>
+          <div class="card">
+            <form id="myResourceSearchForm" class="inline-form">
+              <input type="search" name="search" class="input" placeholder="Search your uploaded resources&hellip;" aria-label="Search your uploaded resources" />
+              <button type="submit" class="btn btn-outline">Search uploads</button>
+            </form>
+          </div>
+          <h2 class="section-subhead">Your Uploaded Resources</h2>
+          <div id="resourceList" class="resource-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Questions ===== -->
+        <section class="dash-panel" id="questions" data-panel="questions" hidden>
+          <header class="panel-head">
+            <h1>Questions</h1>
+            <p>Student doubts you can answer.</p>
+          </header>
+          <h2 class="section-subhead">Questions waiting for your answer</h2>
+          <div id="facultyQuestionList" class="question-list" aria-live="polite"></div>
+          <h2 class="section-subhead">Your answered questions</h2>
+          <div id="facultyAnsweredQuestionList" class="question-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Assignments ===== -->
+        <section class="dash-panel" id="assignments" data-panel="assignments" hidden>
+          <header class="panel-head">
+            <h1>Assignments</h1>
+            <p>Publish branch-specific work and review student submissions.</p>
+          </header>
+          <div class="card">
+            <form id="assignmentForm" class="form" enctype="multipart/form-data">
+              <div class="field">
+                <label for="assignmentTitle">Title</label>
+                <input id="assignmentTitle" name="title" class="input" required minlength="3" />
+              </div>
+              <div class="field">
+                <label for="assignmentDescription">Instructions</label>
+                <textarea id="assignmentDescription" name="description" class="input textarea" rows="3" required></textarea>
+              </div>
+              <div class="field">
+                <label for="assignmentBranch">Student branch</label>
+                <select id="assignmentBranch" name="branch" class="select" required>
+                  <option value="">Select branch</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="assignmentDueAt">Due date (optional)</label>
+                <input id="assignmentDueAt" name="dueAt" type="datetime-local" class="input" />
+              </div>
+              <div class="field">
+                <label for="assignmentFile">Assignment file</label>
+                <input id="assignmentFile" name="file" type="file" class="input" accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.webp" required />
+              </div>
+              <div id="assignmentFormAlert" class="alert" hidden></div>
+              <button type="submit" class="btn btn-primary">Publish assignment</button>
+            </form>
+          </div>
+          <div id="facultyAssignmentList" class="assignment-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Leadership ===== -->
+        <section class="dash-panel" id="leadership" data-panel="leadership" hidden>
+          <header class="panel-head">
+            <h1>Leadership &amp; Contributions</h1>
+            <p>Your teaching contributions, feedback, badges and faculty-only leaderboard.</p>
+          </header>
+          <div id="leadershipDashboard" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Announcements ===== -->
+        <section class="dash-panel" id="announcements" data-panel="announcements" hidden>
+          <header class="panel-head">
+            <h1>Announcements</h1>
+            <p>Publish notices to the students who follow your courses.</p>
+          </header>
+          <div id="notificationList" class="notification-list" aria-live="polite"></div>
+          <div class="card">
+            <form id="announcementForm" class="form" enctype="multipart/form-data">
+              <div class="field">
+                <label for="announcementTitle">Title</label>
+                <input type="text" id="announcementTitle" name="title" class="input" placeholder="Announcement title" required />
+              </div>
+              <div class="field">
+                <label for="announcementMessage">Message (optional if image provided)</label>
+                <textarea id="announcementMessage" name="message" class="input textarea" rows="3" placeholder="What do you want to announce?"></textarea>
+              </div>
+              <div class="field">
+                <label for="announcementAudience">Audience</label>
+                <select id="announcementAudience" name="audience" class="select" required>
+                  <option value="all">All</option>
+                  <option value="student">Students</option>
+                  <option value="faculty">Faculty</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="announcementFile">Image (optional)</label>
+                <input type="file" id="announcementFile" name="file" class="input" accept="image/*" />
+              </div>
+              <div id="announcementFormAlert" class="alert" hidden></div>
+              <button type="submit" class="btn btn-primary">Publish Announcement</button>
+            </form>
+          </div>
+          <h2 class="section-subhead">Recent Announcements</h2>
+          <div id="facultyAnnouncementList" class="announcement-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Profile ===== -->
+        <section class="dash-panel" id="profile" data-panel="profile" hidden>
+          <header class="panel-head">
+            <h1>Profile</h1>
+            <p>Your CampusHub account details.</p>
+          </header>
+          <div class="card">
+            <dl class="detail-list">
+              <div><dt>Full name</dt><dd data-user-name>Loading&hellip;</dd></div>
+              <div><dt>Email</dt><dd data-user-email>Loading&hellip;</dd></div>
+              <div><dt>Role</dt><dd data-user-role-label>Faculty</dd></div>
+              <div><dt>Created at</dt><dd data-user-created>Loading&hellip;</dd></div>
+            </dl>
+            <p class="muted small">Contact your CampusHub administrator if your account details need to be updated.</p>
+          </div>
+          <div class="card">
+            <h2 class="card-title">Session</h2>
+            <p class="muted small">
+              You are authenticated with an httpOnly cookie that stores a signed token. Logging out
+              removes that cookie and ends the session.
+            </p>
+            <button type="button" class="btn btn-outline" data-logout>Logout</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">&copy; <span data-year>2026</span> CampusHub &mdash; Campus Knowledge &amp; Resource Sharing System</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="#" data-panel-target="profile">Profile</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

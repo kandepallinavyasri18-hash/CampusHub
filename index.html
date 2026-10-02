@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusHub &mdash; Campus Knowledge &amp; Resource Sharing System</title>
+  <meta name="description" content="CampusHub is a campus knowledge and resource sharing system where students and faculty share study material, ask questions and follow announcements." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127891;</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html">
+        <span class="brand-mark" aria-hidden="true">&#127891;</span>
+        <span class="brand-text">Campus<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="primaryNav" aria-label="Main navigation">
+        <a href="/index.html" class="is-active">Home</a>
+        <a href="/index.html#features">Features</a>
+        <a href="/register.html">Register</a>
+        <a href="/login.html">Login</a>
+        <span class="nav-auth" data-auth-slot="header"></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="pill">Campus Knowledge &amp; Resource Sharing System</span>
+          <h1>One place for every <span class="accent">note, doubt and notice</span> on campus.</h1>
+          <p class="lede">
+            CampusHub connects students and faculty so study material, answers and campus
+            announcements live in a single, searchable hub &mdash; instead of being scattered
+            across chat groups and notice boards.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/register.html">Register</a>
+            <a class="btn btn-outline btn-lg" href="/login.html">Login</a>
+          </div>
+          <p class="hero-note">Students and faculty can register themselves. Admin accounts are created by the administrator.</p>
+        </div>
+
+        <aside class="hero-card" aria-label="System highlights">
+          <h2 class="hero-card-title">Built for campus life</h2>
+          <ul class="check-list">
+            <li>Role-based dashboards for students, faculty and admins</li>
+            <li>Secure registration &amp; login with hashed passwords</li>
+            <li>Announcements that reach the right audience</li>
+            <li>Search-first access to shared resources</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    <!-- ===================== WHAT YOU CAN DO ===================== -->
+    <section class="section" id="features">
+      <div class="container">
+        <header class="section-head">
+          <h2>What you can do with CampusHub</h2>
+          <p>Four simple things that make sharing knowledge across a campus much easier.</p>
+        </header>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">&#128193;</span>
+            <h3>Share Resources</h3>
+            <p>Faculty and students upload notes, slides, question papers and reference links &mdash; organised by category and course.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">&#128269;</span>
+            <h3>Find Knowledge</h3>
+            <p>Search the whole campus library of material in seconds instead of asking around in group chats.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">&#10067;</span>
+            <h3>Ask Questions</h3>
+            <p>Post a doubt and get answers from classmates and faculty who have already been through it.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true">&#128227;</span>
+            <h3>Campus Announcements</h3>
+            <p>Exams, events, deadlines and notices published by faculty and administration, all in one feed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="section section-alt">
+      <div class="container">
+        <header class="section-head">
+          <h2>How it works</h2>
+          <p>Get started in three steps. Authentication and database storage are already in place.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">1</span>
+            <h3>Create your account</h3>
+            <p>Register with your full name, email and a password, and pick your role: Student or Faculty.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">2</span>
+            <h3>Log in securely</h3>
+            <p>Your password is hashed before it is stored, and you are redirected to the dashboard for your role.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">3</span>
+            <h3>Start sharing</h3>
+            <p>Use your dashboard to reach resources, questions, announcements and your profile.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== ROLES ===================== -->
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <h2>Roles in CampusHub</h2>
+          <p>Each role sees a different dashboard, and access is enforced on the server.</p>
+        </header>
+
+        <div class="role-grid">
+          <article class="role-card">
+            <h3><span aria-hidden="true">&#127891;</span> Student</h3>
+            <p>Search resources, manage your own uploads, ask questions and follow announcements.</p>
+          </article>
+          <article class="role-card">
+            <h3><span aria-hidden="true">&#128218;</span> Faculty</h3>
+            <p>Upload and manage teaching resources, answer questions and publish announcements.</p>
+          </article>
+          <article class="role-card">
+            <h3><span aria-hidden="true">&#128274;</span> Admin</h3>
+            <p>Manage users, resources, categories, announcements and platform statistics.</p>
+            <p class="muted small">Admin accounts are created separately by an administrator &mdash; the option is not available on the public registration form.</p>
+          </article>
+        </div>
+
+        <div class="cta-band">
+          <div>
+            <h3>Ready to join CampusHub?</h3>
+            <p>Create your student or faculty account in under a minute.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="/register.html">Register now</a>
+            <a class="btn btn-ghost" href="/login.html">I already have an account</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a class="brand brand-footer" href="/index.html">
+          <span class="brand-mark" aria-hidden="true">&#127891;</span>
+          <span class="brand-text">Campus<span>Hub</span></span>
+        </a>
+        <p class="muted small">Campus Knowledge &amp; Resource Sharing System.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#features">Features</a>
+        <a href="/register.html">Register</a>
+        <a href="/login.html">Login</a>
+      </nav>
+      <p class="muted small">&copy; <span data-year>2026</span> CampusHub</p>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

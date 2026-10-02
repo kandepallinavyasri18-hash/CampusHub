@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard &mdash; CampusHub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127891;</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="admin-dashboard" data-role="admin">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header dash-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html">
+        <span class="brand-mark" aria-hidden="true">&#127891;</span>
+        <span class="brand-text">Campus<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="dashSidebar" aria-label="Toggle dashboard navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="dash-header-right">
+        <span class="role-badge role-badge-admin" data-user-role>&#128274; Admin</span>
+        <span class="user-chip" data-user-name>Loading&hellip;</span>
+        <button type="button" class="btn btn-outline btn-sm" data-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dash-layout container">
+    <aside class="dash-sidebar" id="dashSidebar">
+      <nav class="dash-nav" aria-label="Admin dashboard sections">
+        <a class="dash-nav-link is-active" href="#users" data-panel-target="users"><span aria-hidden="true">&#128101;</span> Users</a>
+        <a class="dash-nav-link" href="#resources" data-panel-target="resources"><span aria-hidden="true">&#128193;</span> Resources</a>
+        <a class="dash-nav-link" href="#questions" data-panel-target="questions"><span aria-hidden="true">&#10067;</span> Questions</a>
+        <a class="dash-nav-link" href="#categories" data-panel-target="categories"><span aria-hidden="true">&#127991;&#65039;</span> Categories</a>
+        <a class="dash-nav-link" href="#announcements" data-panel-target="announcements"><span aria-hidden="true">&#128227;</span> Announcements</a>
+        <a class="dash-nav-link" href="#leadership" data-panel-target="leadership"><span aria-hidden="true">&#127942;</span> Leadership</a>
+        <a class="dash-nav-link" href="#statistics" data-panel-target="statistics"><span aria-hidden="true">&#128202;</span> Statistics</a>
+      </nav>
+      <div class="dash-sidebar-foot">
+        <p class="muted small">Signed in as admin.</p>
+        <button type="button" class="btn btn-outline btn-sm btn-block" data-logout>Logout</button>
+      </div>
+    </aside>
+
+    <main class="dash-main" id="main">
+      <div class="session-state" id="sessionState">
+        <span class="spinner" aria-hidden="true"></span> Checking your session&hellip;
+      </div>
+
+      <div id="dashContent" hidden>
+        <!-- ===== Users ===== -->
+        <section class="dash-panel" id="users" data-panel="users" hidden>
+          <header class="panel-head">
+            <h1>Users</h1>
+            <p>All registered students, faculty and admins.</p>
+          </header>
+          <div class="card">
+            <div class="inline-form">
+              <input id="adminUserSearch" type="search" class="input" placeholder="Search users by name or email&hellip;" aria-label="Search users" />
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr><th>Full name</th><th>Email</th><th>Role</th><th>Branch</th><th>Created at</th><th>Account</th></tr>
+                </thead>
+                <tbody id="adminUsersTableBody"><tr><td colspan="6" class="muted">Loading users…</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== Leadership administration ===== -->
+        <section class="dash-panel" id="leadership" data-panel="leadership" hidden>
+          <header class="panel-head">
+            <h1>Leadership &amp; Contribution Management</h1>
+            <p>Review separate student and faculty leaders, ratings, badges and branch rankings.</p>
+          </header>
+          <div id="adminLeadershipDashboard" aria-live="polite">
+            <div class="card">
+              <label for="studentBranchRankingFilter">Select branch</label>
+              <select id="studentBranchRankingFilter" class="select">
+                <option value="">All branches</option>
+              </select>
+            </div>
+            <div id="branchStudentRankings"></div>
+            <div class="card">
+              <h2 class="card-title">Student rating distribution</h2>
+              <div id="branchRatingGraph" class="leadership-bars" aria-label="Student rating distribution by branch"></div>
+            </div>
+            <div class="leadership-columns">
+              <section class="card"><h2 class="card-title">Student leaderboard</h2><div id="adminStudentLeaderboard"></div></section>
+              <section class="card"><h2 class="card-title">Faculty leaderboard</h2><div id="adminFacultyLeaderboard"></div></section>
+            </div>
+            <section class="card">
+              <h2 class="card-title">Suspicious activity review</h2>
+              <div id="suspiciousLeadershipActivity"></div>
+            </section>
+            <section class="card">
+              <h2 class="card-title">Resource ratings</h2>
+              <div id="adminResourceRatings"></div>
+            </section>
+            <section class="card">
+              <h2 class="card-title">Recent contribution history and moderation</h2>
+              <div id="adminContributionReview"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ===== Resources ===== -->
+        <section class="dash-panel" id="resources" data-panel="resources" hidden>
+          <header class="panel-head">
+            <h1>Resources</h1>
+            <p>Moderate every resource shared on CampusHub.</p>
+          </header>
+          <div id="adminResourcesList" class="resource-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Questions and answers ===== -->
+        <section class="dash-panel" id="questions" data-panel="questions" hidden>
+          <header class="panel-head">
+            <h1>Questions and Answers</h1>
+            <p>Review campus questions and moderate inappropriate content.</p>
+          </header>
+          <div id="adminQuestionsList" class="question-list" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Categories ===== -->
+        <section class="dash-panel" id="categories" data-panel="categories" hidden>
+          <header class="panel-head">
+            <h1>Categories</h1>
+            <p>Organise resources by subject, course or material type.</p>
+          </header>
+          <div id="adminCategoriesList" class="card" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Announcements ===== -->
+        <section class="dash-panel" id="announcements" data-panel="announcements" hidden>
+          <header class="panel-head">
+            <h1>Announcements</h1>
+            <p>Campus-wide notices published by the administration.</p>
+          </header>
+
+          <div class="announcement-panel card">
+            <div class="alert" id="announcementFormAlert" role="alert" hidden></div>
+            <form id="announcementForm" class="announcement-form" novalidate enctype="multipart/form-data">
+              <div class="announcement-form-grid">
+                <div class="field">
+                  <label for="announcementTitle">Title</label>
+                  <input id="announcementTitle" name="title" type="text" maxlength="120" placeholder="New campus notice" required />
+                </div>
+                <div class="field">
+                  <label for="announcementAudience">Audience</label>
+                  <select id="announcementAudience" name="audience">
+                    <option value="all">All users</option>
+                    <option value="student">Students</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="admin">Admins</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="announcementMessage">Message (optional if image provided)</label>
+                <textarea id="announcementMessage" name="message" rows="5" maxlength="2000" placeholder="Write the announcement…"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="announcementFile">Image (optional)</label>
+                <input type="file" id="announcementFile" name="file" class="input" accept="image/*" />
+              </div>
+
+              <div class="announcement-form-actions">
+                <button type="submit" class="btn btn-primary" id="announcementSubmit">Publish announcement</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="announcement-list" id="announcementList" aria-live="polite"></div>
+        </section>
+
+        <!-- ===== Statistics ===== -->
+        <section class="dash-panel" id="statistics" data-panel="statistics" hidden>
+          <header class="panel-head">
+            <h1>Statistics</h1>
+            <p>Platform usage at a glance.</p>
+          </header>
+          <div class="stat-grid">
+            <article class="stat-card"><span class="stat-label">Total users</span><span class="stat-value" id="adminStatUsers">&mdash;</span></article>
+            <article class="stat-card"><span class="stat-label">Students</span><span class="stat-value" id="adminStatStudents">&mdash;</span></article>
+            <article class="stat-card"><span class="stat-label">Faculty</span><span class="stat-value" id="adminStatFaculty">&mdash;</span></article>
+            <article class="stat-card"><span class="stat-label">Active resources</span><span class="stat-value" id="adminStatResources">&mdash;</span></article>
+            <article class="stat-card"><span class="stat-label">Questions answered</span><span class="stat-value" id="adminStatAnswers">&mdash;</span></article>
+            <article class="stat-card"><span class="stat-label">Uploads this month</span><span class="stat-value" id="adminStatUploads">&mdash;</span></article>
+          </div>
+          <p id="adminStatsStatus" class="muted small" aria-live="polite"></p>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">&copy; <span data-year>2026</span> CampusHub &mdash; Campus Knowledge &amp; Resource Sharing System</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="#" data-panel-target="users">Users</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

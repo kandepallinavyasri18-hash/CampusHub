@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login &mdash; CampusHub</title>
+  <meta name="description" content="Login to your CampusHub student, faculty or admin account." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127891;</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body data-page="login">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/index.html">
+        <span class="brand-mark" aria-hidden="true">&#127891;</span>
+        <span class="brand-text">Campus<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="primaryNav" aria-label="Main navigation">
+        <a href="/index.html">Home</a>
+        <a href="/register.html">Register</a>
+        <a href="/login.html" class="is-active">Login</a>
+        <span class="nav-auth" data-auth-slot="header"></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="auth-main">
+    <div class="container auth-layout">
+      <!-- ---------- Info side ---------- -->
+      <aside class="auth-aside">
+        <h1>Welcome back</h1>
+        <p class="lede small">
+          Sign in to reach your dashboard. CampusHub routes you to the right dashboard
+          automatically, based on the role stored on your account.
+        </p>
+        <ul class="check-list">
+          <li><strong>Student</strong> &rarr; student dashboard</li>
+          <li><strong>Faculty</strong> &rarr; faculty dashboard</li>
+          <li><strong>Admin</strong> &rarr; admin dashboard</li>
+        </ul>
+        <p class="muted small">New to CampusHub? <a href="/register.html">Create an account</a>.</p>
+      </aside>
+
+      <!-- ---------- Form side ---------- -->
+      <section class="auth-card" aria-labelledby="loginHeading">
+        <h2 id="loginHeading">Login to CampusHub</h2>
+        <p class="muted small">Enter the email and password you registered with.</p>
+
+        <!-- Global status message (filled by js/script.js) -->
+        <div class="alert" id="formAlert" role="alert" aria-live="polite" hidden></div>
+
+        <form id="loginForm" class="form" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email"
+                   placeholder="you@college.edu" required />
+            <p class="field-error" id="emailError" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input type="password" id="password" name="password" autocomplete="current-password"
+                     placeholder="Your password" required />
+              <button type="button" class="btn-toggle-pw" data-toggle-password="password" aria-label="Show password">Show</button>
+            </div>
+            <p class="field-error" id="passwordError" hidden></p>
+          </div>
+
+          <fieldset class="field role-fieldset">
+            <legend>Login as <span class="muted small">(optional)</span></legend>
+            <select id="expectedRole" name="expectedRole" class="select">
+              <option value="">Auto-detect my role (recommended)</option>
+              <option value="student">Student</option>
+              <option value="faculty">Faculty</option>
+            </select>
+            <p class="field-hint">
+              This is only a convenience hint for the sign-in form. Your real role is read from
+              the database on the server, so it cannot be changed from the browser.
+            </p>
+          </fieldset>
+
+          <div class="field">
+            <label for="loginBranch">Branch <span class="muted small">(optional verification)</span></label>
+            <select id="loginBranch" name="branch" class="select">
+              <option value="">Do not verify branch</option>
+              <option>CSE</option>
+              <option>CSE (Data Science)</option>
+              <option>ECE</option>
+              <option>EEE</option>
+              <option>Computer Science</option>
+              <option>Information Technology</option>
+              <option>Electronics</option>
+              <option>Mechanical</option>
+              <option>Civil</option>
+              <option>Electrical</option>
+            </select>
+            <p class="field-error" id="branchError" hidden></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="loginSubmit">Login</button>
+        </form>
+
+        <p class="auth-switch">Don&rsquo;t have an account? <a href="/register.html">Register</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted small">&copy; <span data-year>2026</span> CampusHub &mdash; Campus Knowledge &amp; Resource Sharing System</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="/register.html">Register</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
