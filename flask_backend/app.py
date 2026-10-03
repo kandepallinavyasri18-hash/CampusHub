@@ -41,12 +41,15 @@ from flask_backend.leadership import (
 from flask_backend.identity import clean_name, normalize_email, normalize_name
 
 ROOT = Path(__file__).resolve().parent.parent
-INSTANCE = ROOT / "instance"
+INSTANCE = Path("/tmp/instance") if os.getenv("VERCEL") else ROOT / "instance"
 INSTANCE.mkdir(parents=True, exist_ok=True)
 load_dotenv(ROOT / ".env")
 UPLOADS = Path(os.getenv("UPLOADS_PATH", str(ROOT / "server" / "uploads"))).resolve()
-UPLOADS.mkdir(parents=True, exist_ok=True)
-
+try:
+    UPLOADS.mkdir(parents=True, exist_ok=True)
+except OSError:
+    UPLOADS = Path("/tmp/uploads")
+    UPLOADS.mkdir(parents=True, exist_ok=True)
 COOKIE = os.getenv("COOKIE_NAME", "campushub_token")
 ENVIRONMENT = os.getenv("FLASK_ENV", "development")
 configured_secret = os.getenv("JWT_SECRET") or os.getenv("SECRET_KEY")
