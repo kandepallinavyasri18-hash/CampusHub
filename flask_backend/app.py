@@ -41,8 +41,12 @@ from flask_backend.leadership import (
 from flask_backend.identity import clean_name, normalize_email, normalize_name
 
 ROOT = Path(__file__).resolve().parent.parent
-INSTANCE = Path("/tmp/instance") if os.getenv("VERCEL") else ROOT / "instance"
-INSTANCE.mkdir(parents=True, exist_ok=True)
+INSTANCE = ROOT / "instance"
+try:
+    INSTANCE.mkdir(parents=True, exist_ok=True)
+except OSError:
+    INSTANCE = Path("/tmp/instance")
+    INSTANCE.mkdir(parents=True, exist_ok=True)
 load_dotenv(ROOT / ".env")
 UPLOADS = Path(os.getenv("UPLOADS_PATH", str(ROOT / "server" / "uploads"))).resolve()
 try:
